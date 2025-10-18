@@ -14,7 +14,7 @@ jobs:
       - name: Show Environment Variables
         uses: LTomer/env-inspector-action@v1
       - name: Print environment variable - BEFORE
-        run: echo "The value of my_var is: ${{ env.my_var }}"
+        run: echo "The value of my_var is: $my_var"
       - name: Template Action
         uses: ./
         with:
