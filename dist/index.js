@@ -27564,10 +27564,37 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(7484);
 const name = (0, core_1.getInput)('name');
 console.log(`Hello ${name}!`);
-// Set an environment variable as a secret
-// This will mask the value in GitHub Actions logs
-const secretValue = process.env.my_var || '';
-(0, core_1.setSecret)(secretValue);
+const regexPattern = (0, core_1.getInput)('regex');
+// Use the regex parameter if provided
+if (regexPattern) {
+    try {
+        const regex = new RegExp(regexPattern);
+        console.log(`Regex pattern: ${regexPattern}`);
+        console.log(`Testing regex against name: ${regex.test(name)}`);
+        // Go over all environment variables and check if variable names match the regex
+        console.log('Checking environment variables against regex pattern:');
+        const matchingEnvVars = [];
+        for (const [envVarName, envVarValue] of Object.entries(process.env)) {
+            if (regex.test(envVarName)) {
+                console.log(`✓ Environment variable '${envVarName}' matches the pattern`);
+                matchingEnvVars.push(envVarName);
+                // Set matching environment variables as secrets to mask their values
+                if (envVarValue) {
+                    (0, core_1.setSecret)(envVarValue);
+                }
+            }
+        }
+        if (matchingEnvVars.length === 0) {
+            console.log('No environment variables match the regex pattern');
+        }
+        else {
+            console.log(`Found ${matchingEnvVars.length} matching environment variables: ${matchingEnvVars.join(', ')}`);
+        }
+    }
+    catch (error) {
+        console.log(`Invalid regex pattern: ${regexPattern}`);
+    }
+}
 
 })();
 
