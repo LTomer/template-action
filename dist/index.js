@@ -27564,6 +27564,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(7484);
 const name = (0, core_1.getInput)('name');
 console.log(`Hello ${name}!`);
+// Set an environment variable as a secret
+// This will mask the value in GitHub Actions logs
+const secretValue = process.env.my_var || '';
+(0, core_1.setSecret)(secretValue);
 
 })();
 
