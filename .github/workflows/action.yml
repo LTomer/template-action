@@ -7,15 +7,22 @@ jobs:
   run-my-action:
     name: Checks if this action works
     runs-on: ubuntu-latest
+    env:
+      API_TOKEN: secret-api-token-123
+      DB_PASSWORDS: my-database-password
+      SSL_CERT_PATH: /path/to/certificate
+      NORMAL_VAR: this-is-normal
+    
     steps:
       - uses: actions/checkout@v3
       - name: Set environment variable
-        run: echo "my_var=test-TEST" >> $GITHUB_ENV
+        run: echo "my_var_Token=test-TEST" >> $GITHUB_ENV
       - name: Show Environment Variables
         uses: LTomer/env-inspector-action@v1
       - name: Template Action
         uses: ./
         with:
           name: 'LTomer'
+          regex: '(?i).*(cert|password|token).*'
       - name: Show Environment Variables
         uses: LTomer/env-inspector-action@v1

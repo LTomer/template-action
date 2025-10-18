@@ -7,6 +7,10 @@ inputs:
     description: 'The name of the person to greet'
     required: true
     default: 'World'
+  regex:
+    description: 'Filter Environment Variables that should be set as secrets with regex'
+    required: false
+    default: ''
     
 runs:
   using: 'node24'
