@@ -13,8 +13,8 @@ jobs:
         run: echo "my_var=test-TEST" >> $GITHUB_ENV
       - name: Show Environment Variables
         uses: LTomer/env-inspector-action@v1
-      # - name: Print environment variable - BEFORE
-      #   run: echo "The value of my_var is: ${{ env.my_var }}"
+      - name: Print environment variable - BEFORE
+        run: echo "The value of my_var is: ${{ env.my_var }}"
       - name: Template Action
         uses: ./
         with:
