@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Set environment variable
+        run: echo "my_var=test-TEST" >> $GITHUB_ENV
+      - name: Print environment variable - BEFORE
+        run: echo "The value of my_var is: ${{ env.my_var }}"
       - name: Template Action
         uses: ./
         with:
           name: 'LTomer'
+      - name: Print environment variable - AFTER
+        run: echo "The value of my_var is: ${{ env.my_var }}"
