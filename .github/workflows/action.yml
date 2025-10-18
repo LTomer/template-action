@@ -23,6 +23,5 @@ jobs:
         uses: ./
         with:
           name: 'LTomer'
-          regex: ".*(cert|password|token).*"
       - name: Show Environment Variables
         uses: LTomer/env-inspector-action@v1
