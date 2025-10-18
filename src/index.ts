@@ -8,7 +8,7 @@ const regexPattern = getInput('regex');
 // Use the regex parameter if provided
 if (regexPattern) {
   try {
-    const regex = new RegExp(regexPattern);
+    const regex = new RegExp(regexPattern, 'i'); // Add 'i' flag for case-insensitive matching
     console.log(`Regex pattern: ${regexPattern}`);
     console.log(`Testing regex against name: ${regex.test(name)}`);
     
