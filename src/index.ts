@@ -4,12 +4,15 @@ const name = getInput('name');
 console.log(`Hello ${name}!`);
 
 const regexPattern = getInput('regex');
+const ignoreCase = getInput('ignoreCase').toLowerCase() === 'true';
 
 // Use the regex parameter if provided
 if (regexPattern) {
   try {
-    const regex = new RegExp(regexPattern, 'i'); // Add 'i' flag for case-insensitive matching
+    const regexFlags = ignoreCase ? 'i' : '';
+    const regex = new RegExp(regexPattern, regexFlags);
     console.log(`Regex pattern: ${regexPattern}`);
+    console.log(`Case-insensitive: ${ignoreCase}`);
     console.log(`Testing regex against name: ${regex.test(name)}`);
     
     // Go over all environment variables and check if variable names match the regex

@@ -8,9 +8,13 @@ inputs:
     required: true
     default: 'World'
   regex:
-    description: 'Filter Environment Variables that should be set as secrets with regex'
+    description: 'Filter Environment Variables that should be set as secrets (regex)'
     required: false
-    default: ''
+    default: '.*(cert|password|token).*'
+  ignoreCase:
+    description: 'Enable case-insensitive regex matching'
+    required: false
+    default: 'true'
     
 runs:
   using: 'node24'
